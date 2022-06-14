@@ -83,7 +83,7 @@ public class Stores {
 	
 	@Override
 	public String toString() {
-		return storeName + "\t" + storeTel + "\t" + stars + "\t" + address;
+		return "\n\n영업소 조회 [   영업소명 : " + storeName + "   |   전화번호 : " + storeTel + "   |   평가별점 : " + stars + "   |   주소 : " + address + "   ]";
 	}
 
 	/*

@@ -15,7 +15,7 @@
 	       CAR_TYPE = ?
 </entry>
 
-<entry key=askCarName">
+<entry key="askCarName">
 	SELECT
        STORE_NAME
      , STORE_TEL

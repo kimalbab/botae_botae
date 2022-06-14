@@ -113,18 +113,19 @@ public class Car {
 		this.storeId = storeId;
 	}
 
-	@Override
-	public String toString() {
-		return  carName + "\t" + carType + "\t" + price + "\t" + fuel + "\t" + nation + "\t" +  brand;
-	}
-}
 	/*
 	@Override
 	public String toString() {
-		return "Car [carNo=" + carNo + ", carName=" + carName + ", carType=" + carType + ", price=" + price + ", fuel="
-				+ fuel + ", nation=" + nation + ", brand=" + brand + ", storeId=" + storeId + "]";
+		return  carName + "			\t" + carType + "\t" + price + "\t" + fuel + "			\t" + nation + "\t" +  brand;
+	}*/
+
+	
+	@Override
+	public String toString() {
+		return "차량조회정보 [   차량이름 : " + carName + "   |   차량타입 : " + carType + "   |   가격 : " + price + "   |   연료 : "
+				+ fuel + "   |   제조 : " + nation + "   |   브랜드 : " + brand + "   ]";
 	}
-	*/
+}
 	 
 	
 

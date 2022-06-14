@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import com.br.controller.CarController;
 import com.br.model.vo.Car;
+import com.br.model.vo.Reserve;
 import com.br.model.vo.Stores;
 
 public class CarView {
@@ -50,7 +51,7 @@ public class CarView {
 	
 	public void qualified() {
 		
-		System.out.println("\\n========== 원하는 조건을 골라주세요! ==========");
+		System.out.println("\n========== 원하는 조건을 골라주세요! ==========");
 		System.out.println("1.차량타입으로 고르기 (경차 / 세단 / SUV)");
 		System.out.println("2.차량 가격대로 고르기");
 		System.out.println("3.연료로 고르기");
@@ -90,13 +91,13 @@ public class CarView {
 	
 	
 	public void wantToBuy(ArrayList<Car> list) {
-		System.out.println("해당 차량 중 구매를 원하시는 차량이 있나요?");
+		System.out.println("\n\n해당 차량 중 구매를 원하시는 차량이 있나요?");
 		System.out.print("1. 예   |   2. 아니오");
 		int yesOrNo = sc.nextInt();
 		sc.nextLine();
 		
 		if(yesOrNo == 1) {
-			System.out.print("원하시는 차량 이름을 알려주세요 : ");
+			System.out.print("\n\n원하시는 차량 이름을 알려주세요 : ");
 			String name = sc.nextLine();
 			cc.askCarName(name);
 		} else {
@@ -106,14 +107,31 @@ public class CarView {
 		
 	}
 	
+	public void reserve(String messege) {
+		System.out.print("\n\n고객님 성함 : ");
+		String cusName = sc.nextLine();
+		
+		System.out.print("고객님 연락처 : ");
+		String cusTel = sc.nextLine();
+		
+		System.out.print("예약할 차 이름 : ");
+		String carName = sc.nextLine();
+		
+		Reserve r = new Reserve();
+		r.setCusName(cusName);
+		r.setCusTel(cusTel);
+		r.setCarName(carName);
+		cc.reserve(r);
+	}
+	
 	//------------------------------------------------------------------------------------//
 	
 	public void displayFail(String messege) {
-		System.out.println(messege + "다시 시도해주세요.");
+		System.out.println(messege + " 다시 시도해주세요.");
 	}
 	
 	public void displayList(ArrayList<Car> list) {
-		System.out.println("차량이름\t차량타입\t가격\t연료\t생산\t브랜드");
+		//System.out.println("차량이름			\t차량타입\t가격\t연료			\t생산\t브랜드");
 		for(Car c : list) {
 			System.out.println(c);
 		}
@@ -121,8 +139,8 @@ public class CarView {
 	}
 	
 	public void displayStore(Stores s, String name ) {
-		System.out.println(name + "차량 구매 가능한 영업소 : ");
-		System.out.println("영업소이름\t영업소번호\t서비스점수\t주소");
+		System.out.println(name + " 차량 구매 가능한 영업소 : ");
+		//System.out.println("영업소이름\t영업소번호\t서비스점수\t주소");
 		System.out.println(s);
 	
 	}

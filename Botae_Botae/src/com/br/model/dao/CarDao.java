@@ -22,7 +22,7 @@ public class CarDao {
 	
 	public CarDao() {
 		try {
-			prop.loadFromXML(new FileInputStream("src/resources/query.xml"));
+			prop.loadFromXML(new FileInputStream("resources/query.xml"));
 		} catch (InvalidPropertiesFormatException e) {
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {
@@ -81,7 +81,7 @@ public class CarDao {
 			
 			if(rset.next()) {
 				s = new Stores(rset.getString("STORE_NAME"),
-							rset.getString("STORE_TELL"),
+							rset.getString("STORE_TEL"),
 							rset.getInt("STARS"),
 							rset.getString("ADDRESS")
 						);

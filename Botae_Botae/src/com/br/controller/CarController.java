@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.br.model.service.CarService;
 import com.br.model.vo.Car;
+import com.br.model.vo.Reserve;
 import com.br.model.vo.Stores;
 import com.br.view.CarView;
 
@@ -27,7 +28,13 @@ public class CarController {
 			new CarView().displayFail("차량 조회 실패");
 		} else {
 			new CarView().displayStore(s, name);
+			new CarView().reserve("예약하시겠습니까?\n1. 예   |   2. 아니오  ");
 		}
+	}
+		
+	
+	
+	public void reserve(Reserve r) {
 		
 	}
 
