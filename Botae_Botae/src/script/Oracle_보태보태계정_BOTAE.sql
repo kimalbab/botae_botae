@@ -1,0 +1,222 @@
+--CREATE USER BOTAE IDENTIFIED BY BOTAE;
+--GRANT CONNECT, RESOURCE TO BOTAE;
+
+
+--DROP TABLE CAR;
+--DROP TABLE STORES;
+--DROP TABLE RESERVE;
+
+CREATE TABLE CAR (
+    CAR_NO NUMBER NOT NULL,
+    CAR_NAME VARCHAR2 (50) NOT NULL UNIQUE,
+    CAR_TYPE VARCHAR2 (50) NOT NULL CHECK(CAR_TYPE IN ('세단','SUV','경차')),
+    PRICE VARCHAR2 (50) NOT NULL,
+    FUEL VARCHAR2 (50) NOT NULL,
+    NATION VARCHAR2 (50) NOT NULL,
+    BRAND VARCHAR2 (50) NOT NULL,
+    STORE_ID VARCHAR2 (50)
+);
+--CREATE SEQUENCE CARNO_SEQ;
+
+
+CREATE TABLE STORES (
+    STORE_NO NUMBER PRIMARY KEY NOT NULL,
+    STORE_ID VARCHAR2 (50),
+    STORE_NAME VARCHAR2 (50) NOT NULL,
+    STORE_TEL VARCHAR2 (50) NOT NULL,
+    STARS NUMBER CHECK(STARS IN (1,2,3,4,5)),
+    ADDRESS VARCHAR2 (100)
+  --  FOREIGN KEY(STORE_ID) REFERENCES CAR
+);
+--CREATE SEQUENCE STORENO_SEQ;
+
+CREATE TABLE RESERVE (
+    RESERVE_NO NUMBER PRIMARY KEY NOT NULL,
+    CUS_NAME VARCHAR2 (50) NOT NULL,
+    CUS_TEL VARCHAR2 (50) NOT NULL,
+    CAR_NAME VARCHAR2 (50)
+);
+--CREATE SEQUENCE RESERVENO_SEQ;
+
+CREATE TABLE USERS (
+    USER_NO NUMBER PRIMARY KEY,
+    USER_ID VARCHAR2(50) UNIQUE NOT NULL,
+    USER_PWD VARCHAR2(50) NOT NULL
+);
+CREATE SEQUENCE USERNO_SEQ;
+
+INSERT INTO USERS
+VALUES (USERNO_SEQ.NEXTVAL, 'admin','1234');
+
+commit;
+
+INSERT INTO CAR
+VALUES(CARNO_SEQ.NEXTVAL, '모닝', '경차', '1천만원대', '가솔린', '국산차', 'KIA', 'STR_01');
+
+INSERT INTO CAR
+VALUES(CARNO_SEQ.NEXTVAL, 'K3', '세단', '2천만원대', '가솔린', '국산차', 'KIA', 'STR_02');
+
+INSERT INTO CAR
+VALUES(CARNO_SEQ.NEXTVAL, 'K5', '세단', '3천만원대', '가솔린, LPG', '국산차', 'KIA', 'STR_03');
+
+INSERT INTO CAR
+VALUES(CARNO_SEQ.NEXTVAL, 'K7', '세단', '3천만원대', '가솔린, LPG', '국산차', 'KIA', 'STR_04');
+
+INSERT INTO CAR
+VALUES(CARNO_SEQ.NEXTVAL, '셀토스', 'SUV', '2천만원대', '가솔린, 디젤', '국산차', 'KIA', 'STR_05');
+
+INSERT INTO CAR
+VALUES(CARNO_SEQ.NEXTVAL, 'EV6', 'SUV', '5천만원대', '전기', '국산차', 'KIA', 'STR_01');
+
+INSERT INTO CAR
+VALUES(CARNO_SEQ.NEXTVAL, '니로', 'SUV', '4천만원대', '전기', '국산차', 'KIA', 'STR_02');
+
+INSERT INTO CAR
+VALUES(CARNO_SEQ.NEXTVAL, '모하비', 'SUV', '5천만원대', '디젤', '국산차', 'KIA', 'STR_03');
+
+INSERT INTO CAR
+VALUES(CARNO_SEQ.NEXTVAL, '카니발', 'SUV', '4천만원대', '가솔린, 디젤', '국산차', 'KIA', 'STR_04');
+
+INSERT INTO CAR
+VALUES(CARNO_SEQ.NEXTVAL, '레이', 'SUV', '1천만원대', '가솔린', '국산차', 'KIA', 'STR_05');
+
+
+
+
+
+INSERT INTO CAR
+VALUES(CARNO_SEQ.NEXTVAL, '캐스퍼', '경차', '1천만원대', '가솔린', '국산차', '현대', 'STR_01');
+
+INSERT INTO CAR
+VALUES(CARNO_SEQ.NEXTVAL, '아반떼', '세단', '2천만원대', '가솔린, LPG', '국산차', '현대', 'STR_02');
+
+INSERT INTO CAR
+VALUES(CARNO_SEQ.NEXTVAL, '소나타', '세단', '3천만원대', '가솔린, LPG', '국산차', '현대', 'STR_03');
+
+INSERT INTO CAR
+VALUES(CARNO_SEQ.NEXTVAL, '그랜져', '세단', '3천만원대', '가솔린, LPG', '국산차', '현대', 'STR_04');
+
+INSERT INTO CAR
+VALUES(CARNO_SEQ.NEXTVAL, '싼타페', 'SUV', '3천만원대', '가솔린, 디젤', '국산차', '현대', 'STR_05');
+
+INSERT INTO CAR
+VALUES(CARNO_SEQ.NEXTVAL, '팰리세이드', 'SUV', '5천만원대', '가솔린, 디젤', '국산차', '현대', 'STR_01');
+
+INSERT INTO CAR
+VALUES(CARNO_SEQ.NEXTVAL, '넥쏘', 'SUV', '6천만원대', '수소', '국산차', '현대', 'STR_02');
+
+INSERT INTO CAR
+VALUES(CARNO_SEQ.NEXTVAL, '베뉴', 'SUV', '2천만원대', '가솔린', '국산차', '현대', 'STR_03');
+
+INSERT INTO CAR
+VALUES(CARNO_SEQ.NEXTVAL, '코나', 'SUV', '2천만원대', '가솔린', '국산차', '현대', 'STR_04');
+
+INSERT INTO CAR
+VALUES(CARNO_SEQ.NEXTVAL, '아이오닉5', 'SUV', '5천만원대', '전기', '국산차', '현대', 'STR_05');
+
+INSERT INTO CAR
+VALUES(CARNO_SEQ.NEXTVAL, '스타리아', 'SUV', '3천만원대', '디젤, LPG', '국산차', '현대', 'STR_01');
+
+INSERT INTO CAR
+VALUES(CARNO_SEQ.NEXTVAL, '제네시스 G70', '세단', '4천만원대', '가솔린, 디젤', '국산차', '현대', 'STR_02');
+
+INSERT INTO CAR
+VALUES(CARNO_SEQ.NEXTVAL, '제네시스 G80', '세단', '5천만원대', '가솔린, 디젤', '국산차', '현대', 'STR_03');
+
+INSERT INTO CAR
+VALUES(CARNO_SEQ.NEXTVAL, '제네시스 G90', '세단', '9천만원대', '가솔린', '국산차', '현대', 'STR_04');
+
+
+
+INSERT INTO CAR
+VALUES(CARNO_SEQ.NEXTVAL, 'C CLASS', '세단', '6천만원대', '가솔린', '외제차', '벤츠', 'STR_01');
+
+INSERT INTO CAR
+VALUES(CARNO_SEQ.NEXTVAL, 'E CLASS', '세단', '10천만원대', '가솔린, 디젤', '외제차', '벤츠', 'STR_02');
+
+INSERT INTO CAR
+VALUES(CARNO_SEQ.NEXTVAL, 'S CLASS', '세단', '20천만원대', '가솔린, 디젤', '외제차', '벤츠', 'STR_03');
+
+INSERT INTO CAR
+VALUES(CARNO_SEQ.NEXTVAL, 'GLE CLASS', 'SUV', '10천만원대', '가솔린, 디젤', '외제차', '벤츠', 'STR_04');
+
+INSERT INTO CAR
+VALUES(CARNO_SEQ.NEXTVAL, 'CLS CLASS', '세단', '12천만원대', '가솔린', '외제차', '벤츠', 'STR_05');
+
+INSERT INTO CAR
+VALUES(CARNO_SEQ.NEXTVAL, 'G바겐', 'SUV', '16천만원대', '디젤', '외제차', '벤츠', 'STR_01');
+
+INSERT INTO CAR
+VALUES(CARNO_SEQ.NEXTVAL, '320I', '세단', '6천만원대', '가솔린, 디젤', '외제차', 'BMW', 'STR_02');
+
+INSERT INTO CAR
+VALUES(CARNO_SEQ.NEXTVAL, '520I', '세단', '11천만원대', '가솔린, 디젤', '외제차', 'BMW', 'STR_03');
+
+INSERT INTO CAR
+VALUES(CARNO_SEQ.NEXTVAL, '720I', '세단', '20천만원대', '가솔린, 디젤', '외제차', 'BMW', 'STR_04');
+
+INSERT INTO CAR
+VALUES(CARNO_SEQ.NEXTVAL, 'X3', 'SUV', '8천만원대', '가솔린, 디젤', '외제차', 'BMW', 'STR_05');
+
+INSERT INTO CAR
+VALUES(CARNO_SEQ.NEXTVAL, 'X6', 'SUV', '12천만원대', '가솔린, 디젤', '외제차', 'BMW', 'STR_01');
+
+INSERT INTO CAR
+VALUES(CARNO_SEQ.NEXTVAL, '볼트', 'SUV', '4천만원대', '전기', '외제차', '쉐보레', 'STR_02');
+
+INSERT INTO CAR
+VALUES(CARNO_SEQ.NEXTVAL, '콜로라도', 'SUV', '4천만원대', '가솔린', '외제차', '쉐보레', 'STR_03');
+
+INSERT INTO CAR
+VALUES(CARNO_SEQ.NEXTVAL, '스파크', '경차', '1천만원대', '가솔린', '외제차', '쉐보레', 'STR_04');
+
+INSERT INTO CAR
+VALUES(CARNO_SEQ.NEXTVAL, '트레일블레이저', 'SUV', '2천만원대', '가솔린', '외제차', '쉐보레', 'STR_05');
+
+INSERT INTO CAR
+VALUES(CARNO_SEQ.NEXTVAL, '임팔라', '세단', '4천만원대', '가솔린', '외제차', '쉐보레', 'STR_01');
+
+
+INSERT INTO STORES 
+VALUES(STORENO_SEQ.NEXTVAL, 'STR_01', '다파라상사', '031-888-8888', '5', '경기도 성남시');
+
+INSERT INTO STORES
+VALUES(STORENO_SEQ.NEXTVAL, 'STR_02', '왕왕차상사', '031-666-4444', '3', '경기도 부천시');
+
+INSERT INTO STORES
+VALUES(STORENO_SEQ.NEXTVAL, 'STR_03', '순사기상사', '032-444-4664', '2', '인천광역시');
+
+INSERT INTO STORES
+VALUES(STORENO_SEQ.NEXTVAL, 'STR_04', '노말차상사', '02-333-5555', '3', '서울시 동대문구');
+
+INSERT INTO STORES
+VALUES(STORENO_SEQ.NEXTVAL, 'STR_05', '쌈박차상사', '02-777-7777', '5', '서울시 강남구');
+
+COMMIT;
+
+
+SELECT
+       CAR_NAME
+     , CAR_TYPE
+     , PRICE
+     , FUEL
+     , NATION
+     , BRAND
+     , STORE_ID
+  FROM
+       CAR
+ WHERE
+       CAR_TYPE = '세단';
+       
+       
+SELECT
+       STORE_NAME
+     , STORE_TEL
+     , STARS
+     , ADDRESS
+  FROM
+       STORES
+  JOIN 
+       CAR USING (STORE_ID)
+ WHERE
+       CAR_NAME = 'K3';

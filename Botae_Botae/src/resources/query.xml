@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<entry key="askCarType">
+	SELECT
+	       CAR_NAME
+	     , CAR_TYPE
+	     , PRICE
+	     , FUEL
+	     , NATION
+	     , BRAND
+	  FROM
+	       CAR
+	 WHERE
+	       CAR_TYPE = ?
+</entry>
+
+<entry key=askCarName">
+	SELECT
+       STORE_NAME
+     , STORE_TEL
+     , STARS
+     , ADDRESS
+  FROM
+       STORES
+  JOIN 
+       CAR USING (STORE_ID)
+ WHERE
+       CAR_NAME = ?
+</entry>
+
+</properties>
