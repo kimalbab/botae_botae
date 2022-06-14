@@ -97,7 +97,8 @@ public class CarView {
 		sc.nextLine();
 		
 		if(yesOrNo == 1) {
-			System.out.print("\n\n원하시는 차량 이름을 알려주세요 : ");
+			System.out.print("\n\n차량예약 도움진행 ");
+			System.out.print("원하시는 차량 이름을 알려주세요 : ");
 			String name = sc.nextLine();
 			cc.askCarName(name);
 		} else {
@@ -145,6 +146,9 @@ public class CarView {
 	
 	}
 	
+	public void displaySuccess(String messege) {
+		System.out.println(messege + " 정보는 안전하게 보호됩니다!");
+	}
 
 }
 

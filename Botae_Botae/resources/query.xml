@@ -29,4 +29,14 @@
        CAR_NAME = ?
 </entry>
 
+<entry key="reserve">
+INSERT INTO RESERVE
+	 VALUES (
+	 		RESERVENO_SEQ.NEXTVAL
+	 	  , ?
+	 	  , ?
+	 	  , ?
+	 	  )
+</entry>
+
 </properties>

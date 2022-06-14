@@ -35,6 +35,13 @@ public class CarController {
 	
 	
 	public void reserve(Reserve r) {
+		int result = new CarService().reserve(r);
+		
+		if(result > 0) {
+			new CarView().displaySuccess("예약성공!");
+		} else {
+			new CarView().displayFail("예약실패!");
+		}
 		
 	}
 

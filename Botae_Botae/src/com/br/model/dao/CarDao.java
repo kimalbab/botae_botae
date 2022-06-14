@@ -14,6 +14,7 @@ import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 
 import com.br.model.vo.Car;
+import com.br.model.vo.Reserve;
 import com.br.model.vo.Stores;
 
 public class CarDao {
@@ -95,8 +96,33 @@ public class CarDao {
 			close(rset);
 		}
 		
-		
 		return s;
+	}
+	
+	public int reserve(Connection conn, Reserve r) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("reserve");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, r.getCusName());
+			pstmt.setString(2, r.getCusTel());
+			pstmt.setString(3, r.getCarName());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
 	}
 	
 
