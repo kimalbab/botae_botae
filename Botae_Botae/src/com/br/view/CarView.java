@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.br.controller.CarController;
+import com.br.controller.QualifiedCarController;
 import com.br.model.vo.Car;
 import com.br.model.vo.Reserve;
 import com.br.model.vo.Stores;
@@ -11,14 +12,15 @@ import com.br.model.vo.Stores;
 public class CarView {
 	
 	Scanner sc = new Scanner(System.in);
+	QualifiedCarController qcc = new QualifiedCarController();
+	AdditionalCarView acv = new AdditionalCarView();
 	CarController cc = new CarController();
-	
 	
 	public void mainMenu() {
 		
 		
 		while(true) {
-			System.out.println("\n========== 보태보태 차량고르기 프로그램 ==========");
+			System.out.println("\n========== 보태보태 차량 고르기 프로그램 ==========\n");
 			
 			System.out.println("1.입력받은 조건에 맞는 차량추천");
 			System.out.println("2.차량 이름으로 구매 가능한 영업소 조회");
@@ -33,8 +35,8 @@ public class CarView {
 			 sc.nextLine();
 			switch(menu) {
 			case 1 : qualified(); break;
-			case 2 : break;
-			case 3 : break;
+			case 2 : cc.reserveCarName(askCarName()); break;
+			case 3 : cc.searchStars(); break;
 			case 4 : break;
 			case 5 : break;
 			case 6 : break;
@@ -63,51 +65,79 @@ public class CarView {
 		
 		switch(menu) {
 		case 1 : System.out.print("차량 타입 : ");
-				 String carType = sc.nextLine();
-				 cc.askCarType(carType);
+				 String carType = sc.nextLine().toUpperCase();
+				 qcc.askCarType(carType);
 				 break;
-				 /*
+				 
 		case 2 : System.out.print("가격대('n천만원대'로 입력) : ");
 				 String price = sc.nextLine();
-				 cc.askPrice(price);
+				 qcc.askPrice(price);
 				 break;
 		case 3 : System.out.print("연료 (가솔린 / 디젤 / 전기 / 수소)  : ");
 				 String fuel = sc.nextLine();
-				 cc.askFuel(fuel);
+				 qcc.askFuel(fuel);
 				 break;
 		case 4 : System.out.print("국산차 / 외제차 : ");
 				 String nation = sc.nextLine();
-				 cc.askNation(nation);
+				 qcc.askNation(nation);
 				 break;
 		case 5 : System.out.print("브랜드 : ");
-				 String brand = sc.nextLine();
-				 cc.askBrand(brand);
-				 break;*/
-		case 0 : mainMenu();
-		default : System.out.println("잘못 누르셨습니다. 프로그램을 종료합니다."); return;
+				 String brand = sc.nextLine().toUpperCase();
+				 qcc.askBrand(brand);
+				 break;
+		case 0 : System.out.println("돈을 더 보태 와 주세요! 보태보태를 종료합니다."); return;
+		default : System.out.println("잘못 누르셨습니다. 다시 골라주세요. "); return;
 		}
 		
 	}
 	
+
 	
-	public void wantToBuy(ArrayList<Car> list) {
-		System.out.println("\n\n해당 차량 중 구매를 원하시는 차량이 있나요?");
-		System.out.print("1. 예   |   2. 아니오");
+	//------------------------------------------------------------------------------------//
+	
+	public void wantToReserve(String carName) {
+		System.out.println("\n\n상담 예약 하시겠습니까?");
+		System.out.print("1. 예, 에약하겠습니다.   |   2. 아뇨, 좀 더 살펴볼게요.");
 		int yesOrNo = sc.nextInt();
 		sc.nextLine();
 		
 		if(yesOrNo == 1) {
-			System.out.print("\n\n차량예약 도움진행 ");
-			System.out.print("원하시는 차량 이름을 알려주세요 : ");
-			String name = sc.nextLine();
-			cc.askCarName(name);
+			cc.reserveCarName(carName);
+		} else  {
+			System.out.println("처음으로 돌아갑니다.");
+			mainMenu();
+		}
+	}
+
+	
+	
+	public void wantToBuy(ArrayList<Car> list) {
+		System.out.println("\n\n해당 차량 중 구매를 원하시는 차량이 있나요?");
+		System.out.print("1. 네, 에약하겠습니다.   |   2. 네, 하지만 좀 더 살펴볼게요. | 3. 아뇨, 이 중엔 제가 원하는 차가 없습니다.");
+		int yesOrNo = sc.nextInt();
+		sc.nextLine();
+		
+		if(yesOrNo == 1) {
+			String name = askCarName();
+			cc.reserveCarName(name);
+		} else if(yesOrNo == 2) {
+			System.out.println("\n\n>>>> 조회내역 중 세부조건 조회");
+			acv.qualified(list);
 		} else {
-			System.out.println("차량을 다시 골라보세요.");
+			System.out.println("조건을 초기화합니다.");
 			qualified();
+			}
 		}
 		
+	
+	public String askCarName() {
+		System.out.print("\n\n========== 차량예약 진행 ==========\n");
+		System.out.print("원하시는 차량 이름을 알려주세요 : ");
+		String name = sc.nextLine();
+		return name;
 	}
 	
+
 	public void reserve(String messege) {
 		System.out.print("\n\n고객님 성함 : ");
 		String cusName = sc.nextLine();
@@ -125,23 +155,30 @@ public class CarView {
 		cc.reserve(r);
 	}
 	
+
+	
 	//------------------------------------------------------------------------------------//
 	
 	public void displayFail(String messege) {
 		System.out.println(messege + " 다시 시도해주세요.");
+		qualified();
 	}
 	
 	public void displayList(ArrayList<Car> list) {
-		//System.out.println("차량이름			\t차량타입\t가격\t연료			\t생산\t브랜드");
 		for(Car c : list) {
 			System.out.println(c);
 		}
 		wantToBuy(list);
 	}
 	
+	public void displayStoreList(ArrayList<Stores> list) {
+		for(Stores s : list) {
+			System.out.println(s);
+		} System.out.println("\n모든 상사에서 상담은 환영입니다!");
+	}
+	
 	public void displayStore(Stores s, String name ) {
 		System.out.println(name + " 차량 구매 가능한 영업소 : ");
-		//System.out.println("영업소이름\t영업소번호\t서비스점수\t주소");
 		System.out.println(s);
 	
 	}

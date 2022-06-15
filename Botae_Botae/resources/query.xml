@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
+
+
 <entry key="askCarType">
 	SELECT
 	       CAR_NAME
@@ -14,6 +16,83 @@
 	 WHERE
 	       CAR_TYPE = ?
 </entry>
+
+
+<entry key="askPrice">
+	SELECT
+	       CAR_NAME
+	     , CAR_TYPE
+	     , PRICE
+	     , FUEL
+	     , NATION
+	     , BRAND
+	  FROM
+	       CAR
+	 WHERE
+	       PRICE LIKE ?
+</entry>
+
+<entry key="askFuel">
+	SELECT
+	       CAR_NAME
+	     , CAR_TYPE
+	     , PRICE
+	     , FUEL
+	     , NATION
+	     , BRAND
+	  FROM
+	       CAR
+	 WHERE
+	       FUEL LIKE ?
+</entry>
+
+
+
+<entry key="askNation">
+	SELECT
+	       CAR_NAME
+	     , CAR_TYPE
+	     , PRICE
+	     , FUEL
+	     , NATION
+	     , BRAND
+	  FROM
+	       CAR
+	 WHERE
+	       NATION = ?
+</entry>
+
+
+<entry key="askBrand">
+	SELECT
+	       CAR_NAME
+	     , CAR_TYPE
+	     , PRICE
+	     , FUEL
+	     , NATION
+	     , BRAND
+	  FROM
+	       CAR
+	 WHERE
+	       BRAND = ?
+</entry>
+
+
+
+<entry key="searchStars">
+	SELECT
+	       STORE_NAME
+	     , STORE_TEL
+	     , STARS
+	     , ADDRESS
+	  FROM
+	       STORES
+  ORDER BY
+	       STARS DESC;
+</entry>
+
+
+
 
 <entry key="askCarName">
 	SELECT

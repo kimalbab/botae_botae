@@ -33,6 +33,8 @@ public class CarDao {
 		}
 	}
 	
+	//---------------- qualified() 메소드 ---------------//
+	
 	
 	public ArrayList<Car> askCarType(Connection conn, String carType) {
 		ArrayList<Car> list = new ArrayList<>();
@@ -67,6 +69,170 @@ public class CarDao {
 		
 		return list;
 	}
+	
+	public ArrayList<Car> askPrice(Connection conn, int intPrice) {
+		
+		ArrayList<Car> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("askPrice");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + intPrice + "%");
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Car(rset.getString("CAR_NAME"),
+								 rset.getString("CAR_TYPE"),
+								 rset.getString("PRICE"),
+								 rset.getString("FUEL"),
+								 rset.getString("NATION"),
+								 rset.getString("BRAND")
+						));
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return list;
+	}
+	
+	
+	public ArrayList<Car> askFuel(Connection conn, String fuel) {
+		
+		ArrayList<Car> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("askFuel");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + fuel + "%");
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Car(rset.getString("CAR_NAME"),
+								 rset.getString("CAR_TYPE"),
+								 rset.getString("PRICE"),
+								 rset.getString("FUEL"),
+								 rset.getString("NATION"),
+								 rset.getString("BRAND")
+						));	
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		return list;
+	}
+	
+	public ArrayList<Car> askNation(Connection conn, String nation) {
+		ArrayList<Car> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("askNation");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, nation);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Car(rset.getString("CAR_NAME"),
+								 rset.getString("CAR_TYPE"),
+								 rset.getString("PRICE"),
+								 rset.getString("FUEL"),
+								 rset.getString("NATION"),
+								 rset.getString("BRAND")
+						));	
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		return list;
+	}
+	
+	public ArrayList<Car> askBrand(Connection conn, String brand) {
+		
+		ArrayList<Car> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("askBrand");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, brand);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Car(rset.getString("CAR_NAME"),
+								 rset.getString("CAR_TYPE"),
+								 rset.getString("PRICE"),
+								 rset.getString("FUEL"),
+								 rset.getString("NATION"),
+								 rset.getString("BRAND")
+						));	}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		} return list;
+
+	}
+
+	//----------------------------------------//
+	
+	public ArrayList<Stores> searchStars(Connection conn) {
+		
+		ArrayList<Stores> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("searchStars");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Stores(rset.getString("STORE_NAME"),
+									rset.getString("STORE_TEL"),
+									rset.getInt("STARS"),
+									rset.getString("ADDRESS")
+						));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		return list;
+	}
+	
+	
+	//---------------- 주문메소드 ---------------//
+	
 	
 	public Stores askCarName(Connection conn, String name) {
 		Stores s = null;
