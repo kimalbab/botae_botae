@@ -27,6 +27,7 @@ public class QualifiedCarController {
 
 		int intPrice = new CarController().priceConvert(price);
 		ArrayList <Car> list = new CarService().askPrice(intPrice);
+		//ArrayList<Car> newList = new CarController().comparePrice(list, intPrice);
 
 		if(list.isEmpty()) {
 			new CarView().displayFail("차량 조회 실패");
@@ -34,7 +35,7 @@ public class QualifiedCarController {
 			new CarView().displayList(list);
 		}
 
-	}s
+	}
 	
 	public void askFuel(String fuel) {
 		

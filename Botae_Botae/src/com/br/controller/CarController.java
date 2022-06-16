@@ -102,7 +102,7 @@ public class CarController {
 				new CarView().displayFail("차량 조회 실패");
 			} else {
 				new CarView().displayStore(s, carName);
-				new CarView().wantToReserve(carName);
+				new CarView().reserve(carName);
 			}
 			
 		}

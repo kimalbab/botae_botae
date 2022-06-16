@@ -70,7 +70,7 @@ public class CarView {
 				 qcc.askCarType(carType);
 				 break;
 				 
-		case 2 : System.out.print("가격대('n천만원대'로 입력) : ");
+		case 2 : System.out.print("가격대('n'천만원대 숫자만 입력) : ");
 				 String price = sc.nextLine();
 				 qcc.askPrice(price);
 				 break;

@@ -130,21 +130,20 @@ public class CarService {
 		
 		Connection conn = getConnection();
 		Users newU = new CarDao().login(conn, u);
+		ArrayList<Reserve> list = null;
 		
-		if(newU.getUserId().equals(u.getUserId())  && newU.getUserPwd().equals(u.getUserPwd())) {
-		ArrayList<Reserve> list = 	new CarDao().viewReserve(conn);
-		} else {
-			ArrayList<Reserve> list = null;
-		}
+		if(newU.getUserId().equals(u.getUserId()) 
+				&& newU.getUserPwd().equals(u.getUserPwd())) {
+			list = 	new CarDao().viewReserve(conn);
+		} 
 		close(conn);
-		return list;
-		
-	}
+	
+	return list;
 }
 
 
 
-
+}
 
 
 
