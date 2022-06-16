@@ -10,6 +10,7 @@ public class Car {
 	private String nation;
 	private String brand;
 	private String storeId;
+	private int intPrice;
 	
 	public Car() {
 		
@@ -33,6 +34,27 @@ public class Car {
 		this.carName = carName;
 		this.carType = carType;
 		this.price = price;
+		this.fuel = fuel;
+		this.nation = nation;
+		this.brand = brand;
+	}
+	
+	public Car(String carName, String carType,  String price, String fuel, String nation, String brand, int intPrice) {
+		//super();
+		this.carName = carName;
+		this.carType = carType;
+		this.price = price;
+		this.fuel = fuel;
+		this.nation = nation;
+		this.brand = brand;
+		this.intPrice = intPrice;
+	}
+	
+	public Car(String carName, String carType,  int intPrice, String fuel, String nation, String brand) {
+		//super();
+		this.carName = carName;
+		this.carType = carType;
+		this.intPrice = intPrice;
 		this.fuel = fuel;
 		this.nation = nation;
 		this.brand = brand;
@@ -124,6 +146,14 @@ public class Car {
 	public String toString() {
 		return "차량조회정보 [   차량이름 : " + carName + "   |   차량타입 : " + carType + "   |   가격 : " + price + "   |   연료 : "
 				+ fuel + "   |   제조 : " + nation + "   |   브랜드 : " + brand + "   ]";
+	}
+
+	public void setIntPrice(int intPrice) {
+		this.intPrice = intPrice;
+	}
+	
+	public int getIntPrice() {
+		return intPrice;
 	}
 }
 	 

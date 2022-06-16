@@ -18,6 +18,13 @@ public class Reserve {
 		this.cusTel = cusTel;
 		this.carName = carName;
 	}
+	
+	public Reserve(String cusName, String cusTel, String carName) {
+		super();
+		this.cusName = cusName;
+		this.cusTel = cusTel;
+		this.carName = carName;
+	}
 
 	public int getReserveNo() {
 		return reserveNo;

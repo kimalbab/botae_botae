@@ -8,6 +8,7 @@ import com.br.controller.QualifiedCarController;
 import com.br.model.vo.Car;
 import com.br.model.vo.Reserve;
 import com.br.model.vo.Stores;
+import com.br.model.vo.Users;
 
 public class CarView {
 	
@@ -24,7 +25,7 @@ public class CarView {
 			
 			System.out.println("1.입력받은 조건에 맞는 차량추천");
 			System.out.println("2.차량 이름으로 구매 가능한 영업소 조회");
-			System.out.println("3.친절별점이 높은 영업소 차량 조회");
+			System.out.println("3.친절별점이 높은 우수 영업소 차량 조회"); //3번은 보수 필요함!@!
 			System.out.println("4.자동차 가격순 조회");
 			System.out.println("5.내 예산에 맞는 차량 조회");
 			System.out.println("6.차량 상담예약");
@@ -37,11 +38,11 @@ public class CarView {
 			case 1 : qualified(); break;
 			case 2 : cc.reserveCarName(askCarName()); break;
 			case 3 : cc.searchStars(); break;
-			case 4 : break;
-			case 5 : break;
-			case 6 : break;
-			case 7 : break;
-			case 8 : break;
+			case 4 : cc.orderByPrice(); break;
+			case 5 : askBudjet(); break;
+			case 6 : wantToReserve(askCarName()); break;
+			case 7 : cancelReserve(); break;
+			case 8 : login(); break;
 			case 0 : System.out.println("다음에 돈 더 보태서 오세요! 보태보태!");return;
 			default : break;
 			}
@@ -95,6 +96,22 @@ public class CarView {
 	
 	//------------------------------------------------------------------------------------//
 	
+	public void login() {
+		System.out.println("\n\n관리자 메뉴입니다.");
+		System.out.print("ID : ");
+		String userId = sc.nextLine();
+		
+		System.out.print("PWD : ");
+		String userPwd = sc.nextLine();
+		
+		Users u = new Users();
+		u.setUserId(userId);
+		u.setUserPwd(userPwd);
+		
+		cc.login(u);
+		
+	}
+	
 	public void wantToReserve(String carName) {
 		System.out.println("\n\n상담 예약 하시겠습니까?");
 		System.out.print("1. 예, 에약하겠습니다.   |   2. 아뇨, 좀 더 살펴볼게요.");
@@ -108,7 +125,14 @@ public class CarView {
 			mainMenu();
 		}
 	}
-
+	
+	public void cancelReserve() {
+		System.out.println("\n\n예약 취소 서비스입니다.");
+		System.out.print("예약하셨던 성함을 입력해주세요 : ");
+		String cusName = sc.nextLine();
+		cc.cancelReserve(cusName);
+		
+	}
 	
 	
 	public void wantToBuy(ArrayList<Car> list) {
@@ -128,12 +152,18 @@ public class CarView {
 			qualified();
 			}
 		}
-		
+	
+	public void askBudjet() {
+		System.out.println("\n\n차량구매 예산을 알려주세요 : ('n천만원대'로 입력)");
+		String budjet = sc.nextLine();
+		cc.myBudjet(budjet);
+	}
+	
 	
 	public String askCarName() {
 		System.out.print("\n\n========== 차량예약 진행 ==========\n");
 		System.out.print("원하시는 차량 이름을 알려주세요 : ");
-		String name = sc.nextLine();
+		String name = sc.nextLine().toUpperCase();
 		return name;
 	}
 	
@@ -171,10 +201,16 @@ public class CarView {
 		wantToBuy(list);
 	}
 	
+	public void displayReserveList(ArrayList<Reserve> list) {
+		for(Reserve r : list) {
+			System.out.print(r);
+		} System.out.println("\n\n상담예약 조회 완료!!");
+	}
+	
 	public void displayStoreList(ArrayList<Stores> list) {
 		for(Stores s : list) {
-			System.out.println(s);
-		} System.out.println("\n모든 상사에서 상담은 환영입니다!");
+			System.out.print(s);
+		} System.out.println("\n\n모든 상사에서 상담을 환영입니다!");
 	}
 	
 	public void displayStore(Stores s, String name ) {

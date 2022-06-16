@@ -88,10 +88,37 @@
 	  FROM
 	       STORES
   ORDER BY
-	       STARS DESC;
+	       STARS DESC
+</entry>
+
+<entry key="onlySelect">
+	SELECT
+	       CAR_NAME
+	     , CAR_TYPE
+	     , PRICE
+	     , FUEL
+	     , NATION
+	     , BRAND
+	  FROM
+	       CAR
+	   
 </entry>
 
 
+
+<entry key="myBudjet">
+	SELECT
+	       CAR_NAME
+	     , CAR_TYPE
+	     , PRICE
+	     , FUEL
+	     , NATION
+	     , BRAND
+	  FROM
+	       CAR
+	 WHERE
+	       PRICE LIKE ?
+</entry>
 
 
 <entry key="askCarName">
@@ -118,4 +145,21 @@ INSERT INTO RESERVE
 	 	  )
 </entry>
 
+
+<entry key="cancleReserve">
+DELETE FROM RESERVE
+WHERE CUS_NAME = ?
+</entry>
+
+
+<entry key="login">
+SELECT
+       USER_ID
+     , USER_PWD
+  FROM 
+       USERS;
+ WHERE
+ 	   USER_ID = ?
+ 	 , USER_PWD =?
+</entry>
 </properties>

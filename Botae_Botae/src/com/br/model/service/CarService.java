@@ -12,6 +12,7 @@ import com.br.model.dao.CarDao;
 import com.br.model.vo.Car;
 import com.br.model.vo.Reserve;
 import com.br.model.vo.Stores;
+import com.br.model.vo.Users;
 
 public class CarService {
 	
@@ -69,6 +70,22 @@ public class CarService {
 		
 	}
 	
+	public ArrayList<Car> orderByPrice() {
+		Connection conn = null;
+		ArrayList<Car> list = new CarDao().orderBy(conn);
+		close(conn);
+		return list;
+	}
+	
+	
+	public ArrayList<Car> myBudjet(){
+		Connection conn = null;
+		ArrayList<Car> list = new CarDao().myBudjet(conn);
+		close(conn);
+		return list;
+	}
+	
+	
 	//---------------- 주문메소드 ---------------//
 	
 	
@@ -93,4 +110,43 @@ public class CarService {
 		return result;
 		
 	}
+	
+	public int cancleReserve(String cusName) {
+		
+		Connection conn = getConnection();
+		int result = new CarDao().cancleReserve(conn, cusName);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
+	}
+	
+	public ArrayList<Reserve> login(Users u) {
+		
+		Connection conn = getConnection();
+		Users newU = new CarDao().login(conn, u);
+		
+		if(newU.getUserId().equals(u.getUserId())  && newU.getUserPwd().equals(u.getUserPwd())) {
+		ArrayList<Reserve> list = 	new CarDao().viewReserve(conn);
+		} else {
+			ArrayList<Reserve> list = null;
+		}
+		close(conn);
+		return list;
+		
+	}
 }
+
+
+
+
+
+
+
+
+

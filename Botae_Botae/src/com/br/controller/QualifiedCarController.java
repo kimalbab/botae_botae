@@ -24,31 +24,17 @@ public class QualifiedCarController {
 	}
 	
 	public void askPrice(String price) {
-		
-		char charPrice = 0;
-		int intPrice = 0;
-		int [] priceArr = new int [2]; 
-		
-		if(price.length() == 5) {
-			charPrice = price.charAt(0);
-			intPrice = Character.getNumericValue(charPrice);
-		} else {
-			for (int i=0; i<2; i++) {
-				priceArr[i] = Character.getNumericValue(price.charAt(i));
-			}
-			intPrice = (priceArr[0] * 10) + (priceArr[1]);
-		}
-		
+
+		int intPrice = new CarController().priceConvert(price);
 		ArrayList <Car> list = new CarService().askPrice(intPrice);
-		
+
 		if(list.isEmpty()) {
 			new CarView().displayFail("차량 조회 실패");
 		} else {
 			new CarView().displayList(list);
 		}
-		
-	}
-	
+
+	}s
 	
 	public void askFuel(String fuel) {
 		

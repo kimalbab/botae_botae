@@ -16,6 +16,7 @@ import java.util.Properties;
 import com.br.model.vo.Car;
 import com.br.model.vo.Reserve;
 import com.br.model.vo.Stores;
+import com.br.model.vo.Users;
 
 public class CarDao {
 	
@@ -231,6 +232,69 @@ public class CarDao {
 	}
 	
 	
+	public ArrayList<Car> orderBy(Connection conn){
+		
+		ArrayList<Car> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("onlySelect");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Car(rset.getString("CAR_NAME"),
+								 rset.getString("CAR_TYPE"),
+								 rset.getString("PRICE"),
+								 rset.getString("FUEL"),
+								 rset.getString("NATION"),
+								 rset.getString("BRAND")
+						));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	public ArrayList<Car> myBudjet(Connection conn) {
+		
+		ArrayList<Car> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("onlySelect");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Car(rset.getString("CAR_NAME"),
+								 rset.getString("CAR_TYPE"),
+								 rset.getString("PRICE"),
+								 rset.getString("FUEL"),
+								 rset.getString("NATION"),
+								 rset.getString("BRAND")
+						));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	
+	
 	//---------------- 주문메소드 ---------------//
 	
 	
@@ -291,7 +355,90 @@ public class CarDao {
 		
 	}
 	
+	
+	public int cancleReserve(Connection conn, String cusName) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("cancleReserve");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, cusName);
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+		
+	}
+	
+	
+	public Users login(Connection conn, Users u) {
+		
+		Users newU = null;
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("login");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, u.getUserId());
+			pstmt.setString(2, u.getUserPwd());
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
 
+						
+			newU = new Users(rset.getInt("USER_NO"),
+							 rset.getString("USER_NAME"),
+							 rset.getString("USER_PWD")
+							
+					);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return newU;
+	}
+	
+	public ArrayList<Reserve> viewReserve(Connection conn) {
+		
+		ArrayList<Reserve> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("viewReserve");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Reserve(rset.getString("CUS_NAME"),
+									 rset.getString("CUS_TEL"),
+									 rset.getString("CAR_NAME")
+						));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+			}
+
+		return list;
+	}
 }
 
 
