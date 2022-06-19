@@ -104,6 +104,20 @@
 	   
 </entry>
 
+<entry key="orderByPrice">
+	SELECT
+	       CAR_NAME
+	     , CAR_TYPE
+	     , PRICE
+	     , FUEL
+	     , NATION
+	     , BRAND
+	  FROM
+	       CAR
+  ORDER BY	   
+  		   PRICE
+</entry>
+
 
 
 <entry key="myBudjet">

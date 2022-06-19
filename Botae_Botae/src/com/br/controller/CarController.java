@@ -1,6 +1,7 @@
 package com.br.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import com.br.model.service.CarService;
 import com.br.model.vo.Car;
@@ -53,25 +54,37 @@ public class CarController {
 		}
 		
 		public void orderByPrice() {
-			ArrayList<Car> list = new CarService().orderByPrice();
-			ArrayList<Car> newList = new ArrayList<>();
-			
+			ArrayList<Car> list = new CarService().orderBy();
+			ArrayList<Car> alterList = new ArrayList<Car>();
 			
 			// 리스트를 금액따라 배열해줘야함!!!//
 			
 			if(list.isEmpty()) {
 				new CarView().displayFail("차량 조회 실패");
 			} else {
-				for(int i=0; i<list.size(); i++) {
-					int intPrice = new CarController().priceConvert(list.get(i).getPrice());
-					
-					/* 일단 여기서 스탑!
-					list.Add(new Car());
-					
-					newList.addAll(list);
-					*/	
+				
+				for(Car c : list) {
+					int getPrice = priceConvert(c.getPrice());
+					String getPriceStr = "" + getPrice + "";
+					c.setPrice(getPriceStr);
 				}
-				new CarView().displayList(list);
+				
+				for(int i=0; i<list.size(); i++) {
+					alterList.get(i).setCarName(list.get(i).getCarName());
+					alterList.get(i).setCarType(list.get(i).getCarType());
+					alterList.get(i).setIntPrice(Integer.parseInt(list.get(i).getPrice()));
+					alterList.get(i).setFuel(list.get(i).getFuel());
+					alterList.get(i).setNation(list.get(i).getNation());
+					alterList.get(i).setBrand(list.get(i).getBrand());
+				}
+				
+				// 생각해보니 이 리스트들은 오라클에 없이 자바에서만 공유되고 있는 리스트여서
+				// service, dao 쪽으로 옮기지 않아도 된다!
+				//ArrayList<Car> newList = new CarService().orderByPrice(alterList); 
+				
+
+				new CarView().displayList(alterList);
+				
 			}
 			
 		}

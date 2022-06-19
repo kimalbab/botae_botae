@@ -262,6 +262,38 @@ public class CarDao {
 		return list;
 	}
 	
+	
+	public ArrayList<Car> orderByPrice(Connection conn, ArrayList<Car> alterList){
+		
+		ArrayList<Car> newList = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("orderByPrice");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				newList.add(new Car(rset.getString("CAR_NAME"),
+								 rset.getString("CAR_TYPE"),
+								 rset.getString("PRICE"),
+								 rset.getString("FUEL"),
+								 rset.getString("NATION"),
+								 rset.getString("BRAND")
+						));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	
 	public ArrayList<Car> myBudjet(Connection conn) {
 		
 		ArrayList<Car> list = new ArrayList<>();
