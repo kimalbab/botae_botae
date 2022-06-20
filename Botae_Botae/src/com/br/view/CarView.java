@@ -202,6 +202,14 @@ public class CarView {
 	}
 	
 	
+	public void displayIntPriceList(ArrayList<Car> list) {
+		for(int i=0; i<list.size(); i++) {
+			new Car().toStringIntPrice(list.get(i));
+		}
+		wantToBuy(list);
+	}
+	
+	
 	
 	
 	public void displayReserveList(ArrayList<Reserve> list) {

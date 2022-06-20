@@ -1,5 +1,7 @@
 package com.br.model.vo;
 
+import java.util.ArrayList;
+
 public class Car {
 	
 	private int carNo;
@@ -157,10 +159,12 @@ public class Car {
 	}
 
 
-	public String toStringIntPrice() {
+	public String toStringIntPrice(Car c) {
 		return "차량조회정보 [   차량이름 : " + carName + "   |   차량타입 : " + carType + "   |   가격 : " + intPrice + "   |   연료 : "
 				+ fuel + "   |   제조 : " + nation + "   |   브랜드 : " + brand + "   ]";
 	}
+	
+	 
 
 }
 	 

@@ -81,6 +81,11 @@ public class CarController {
 				}
 		
 			// intPrice 넣는데 성공!	
+				if(alterList.isEmpty()) {
+					new CarView().displayFail("매장 조회 실패");
+				} else {
+					new CarView().displayIntPriceList(alterList);
+				}
 			
 		}
 			
