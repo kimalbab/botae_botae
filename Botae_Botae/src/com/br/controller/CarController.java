@@ -57,7 +57,9 @@ public class CarController {
 			ArrayList<Car> list = new CarService().orderBy();
 			ArrayList<Car> alterList = new ArrayList<Car>();
 			
+			
 			// 리스트를 금액따라 배열해줘야함!!!//
+			
 			
 			if(list.isEmpty()) {
 				new CarView().displayFail("차량 조회 실패");
@@ -65,29 +67,24 @@ public class CarController {
 				
 				for(Car c : list) {
 					int getPrice = priceConvert(c.getPrice());
-					String getPriceStr = "" + getPrice + "";
-					c.setPrice(getPriceStr);
+					//String getPriceStr = "" + getPrice + "";
+					c.setIntPrice(getPrice);
 				}
-				
+			}	
 				for(int i=0; i<list.size(); i++) {
-					alterList.get(i).setCarName(list.get(i).getCarName());
-					alterList.get(i).setCarType(list.get(i).getCarType());
-					alterList.get(i).setIntPrice(Integer.parseInt(list.get(i).getPrice()));
-					alterList.get(i).setFuel(list.get(i).getFuel());
-					alterList.get(i).setNation(list.get(i).getNation());
-					alterList.get(i).setBrand(list.get(i).getBrand());
+							alterList.add(new Car (list.get(i).getCarName(),
+												   list.get(i).getCarType(),
+												   list.get(i).getIntPrice(),
+												   list.get(i).getFuel(),
+												   list.get(i).getNation(),
+												   list.get(i).getBrand()));
 				}
-				
-				// 생각해보니 이 리스트들은 오라클에 없이 자바에서만 공유되고 있는 리스트여서
-				// service, dao 쪽으로 옮기지 않아도 된다!
-				//ArrayList<Car> newList = new CarService().orderByPrice(alterList); 
-				
-
-				new CarView().displayList(alterList);
-				
-			}
+		
+			// intPrice 넣는데 성공!	
 			
 		}
+			
+		
 		
 		public void myBudjet(String budjet) {
 			new QualifiedCarController().askPrice(budjet);

@@ -201,6 +201,9 @@ public class CarView {
 		wantToBuy(list);
 	}
 	
+	
+	
+	
 	public void displayReserveList(ArrayList<Reserve> list) {
 		for(Reserve r : list) {
 			System.out.print(r);

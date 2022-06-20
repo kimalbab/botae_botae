@@ -71,19 +71,20 @@ public class CarService {
 	}
 	
 	public ArrayList<Car> orderBy() {
-		Connection conn = null;
+		Connection conn = getConnection();
 		ArrayList<Car> list = new CarDao().orderBy(conn);
 		close(conn);
 		return list;
 	}
 	
+	/*
 	public ArrayList<Car> orderByPrice(ArrayList<Car> alterList) {
 		Connection conn = null;
 		ArrayList<Car> newList = new CarDao().orderByPrice(conn, alterList);
 		close(conn);
 		return newList;
 	}
-	
+	*/
 	
 	public ArrayList<Car> myBudjet(){
 		Connection conn = null;

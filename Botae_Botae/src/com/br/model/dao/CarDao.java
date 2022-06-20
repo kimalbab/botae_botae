@@ -232,9 +232,10 @@ public class CarDao {
 	}
 	
 	
-	public ArrayList<Car> orderBy(Connection conn){
+public ArrayList<Car> orderBy(Connection conn) {
 		
 		ArrayList<Car> list = new ArrayList<>();
+		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
@@ -251,18 +252,17 @@ public class CarDao {
 								 rset.getString("FUEL"),
 								 rset.getString("NATION"),
 								 rset.getString("BRAND")
-						));
-			}
+						));	}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			close(rset);
 			close(pstmt);
-		}
-		return list;
+			close(rset);
+		} return list;
+
 	}
 	
-	
+	/*
 	public ArrayList<Car> orderByPrice(Connection conn, ArrayList<Car> alterList){
 		
 		ArrayList<Car> newList = new ArrayList<>();
@@ -290,9 +290,9 @@ public class CarDao {
 			close(rset);
 			close(pstmt);
 		}
-		return list;
+		return newList;
 	}
-	
+	*/
 	
 	public ArrayList<Car> myBudjet(Connection conn) {
 		
@@ -412,8 +412,6 @@ public class CarDao {
 	public Users login(Connection conn, Users u) {
 		
 		Users newU = null;
-		
-		int result = 0;
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;

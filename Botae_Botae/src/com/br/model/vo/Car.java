@@ -103,6 +103,14 @@ public class Car {
 		this.price = price;
 	}
 
+	public int getIntPrice() {
+		return intPrice;
+	}
+
+	public void setIntPrice(int intPrice) {
+		this.intPrice = intPrice;
+	}
+
 	public String getFuel() {
 		return fuel;
 	}
@@ -148,13 +156,12 @@ public class Car {
 				+ fuel + "   |   제조 : " + nation + "   |   브랜드 : " + brand + "   ]";
 	}
 
-	public void setIntPrice(int intPrice) {
-		this.intPrice = intPrice;
+
+	public String toStringIntPrice() {
+		return "차량조회정보 [   차량이름 : " + carName + "   |   차량타입 : " + carType + "   |   가격 : " + intPrice + "   |   연료 : "
+				+ fuel + "   |   제조 : " + nation + "   |   브랜드 : " + brand + "   ]";
 	}
-	
-	public int getIntPrice() {
-		return intPrice;
-	}
+
 }
 	 
 	
