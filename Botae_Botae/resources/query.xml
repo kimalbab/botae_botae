@@ -108,14 +108,14 @@
 	SELECT
 	       CAR_NAME
 	     , CAR_TYPE
-	     , PRICE
+	     , INT_PRICE
 	     , FUEL
 	     , NATION
 	     , BRAND
 	  FROM
-	       CAR
+	       PRICE_ORDER
   ORDER BY	   
-  		   PRICE
+  		   INT_PRICE
 </entry>
 
 
@@ -175,5 +175,10 @@ SELECT
  WHERE
  	   USER_ID = ?
  	 , USER_PWD =?
+</entry>
+
+<entry key="insertByPrice">
+INSERT INTO PRICE_ORDER
+VALUES(?, ?, ?, ?, ?, ?)
 </entry>
 </properties>

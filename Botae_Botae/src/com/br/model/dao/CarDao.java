@@ -1,6 +1,8 @@
 package com.br.model.dao;
 
 import static com.br.common.JDBCTemplate.close;
+import static com.br.common.JDBCTemplate.commit;
+import static com.br.common.JDBCTemplate.rollback;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -262,8 +264,37 @@ public ArrayList<Car> orderBy(Connection conn) {
 
 	}
 	
-	/*
-	public ArrayList<Car> orderByPrice(Connection conn, ArrayList<Car> alterList){
+public int insertByPrice(Connection conn, ArrayList<Car> alterList){
+	
+	//ArrayList<Car> newList = new ArrayList<>();
+	PreparedStatement pstmt = null;
+	int result = 0;
+	
+	String sql = prop.getProperty("insertByPrice");
+	
+	try {
+		
+		for(int i =0; i< alterList.size(); i++) {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, alterList.get(i).getCarName());
+			pstmt.setString(2, alterList.get(i).getCarType());
+			pstmt.setInt(3, alterList.get(i).getIntPrice());
+			pstmt.setString(4, alterList.get(i).getFuel());
+			pstmt.setString(5, alterList.get(i).getNation());
+		    pstmt.setString(6, alterList.get(i).getBrand());
+		   
+		}
+	    result = pstmt.executeUpdate();	
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(pstmt);
+	}
+	return result;
+}
+	
+	public ArrayList<Car> orderByPrice(Connection conn){
 		
 		ArrayList<Car> newList = new ArrayList<>();
 		PreparedStatement pstmt = null;
@@ -278,7 +309,7 @@ public ArrayList<Car> orderBy(Connection conn) {
 			while(rset.next()) {
 				newList.add(new Car(rset.getString("CAR_NAME"),
 								 rset.getString("CAR_TYPE"),
-								 rset.getString("PRICE"),
+								 rset.getInt("INT_PRICE"),
 								 rset.getString("FUEL"),
 								 rset.getString("NATION"),
 								 rset.getString("BRAND")
@@ -292,7 +323,7 @@ public ArrayList<Car> orderBy(Connection conn) {
 		}
 		return newList;
 	}
-	*/
+	
 	
 	public ArrayList<Car> myBudjet(Connection conn) {
 		

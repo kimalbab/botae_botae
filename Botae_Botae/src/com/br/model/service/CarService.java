@@ -77,17 +77,34 @@ public class CarService {
 		return list;
 	}
 	
-	/*
-	public ArrayList<Car> orderByPrice(ArrayList<Car> alterList) {
-		Connection conn = null;
-		ArrayList<Car> newList = new CarDao().orderByPrice(conn, alterList);
+	public int insertByPrice(ArrayList<Car> alterList) {
+		
+		
+		Connection conn = getConnection();
+		int result = new CarDao().insertByPrice(conn, alterList);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	
+	
+	public ArrayList<Car> orderByPrice() {
+		Connection conn = getConnection();
+		ArrayList<Car> newList = new CarDao().orderByPrice(conn);
 		close(conn);
 		return newList;
 	}
-	*/
+	
+	
 	
 	public ArrayList<Car> myBudjet(){
-		Connection conn = null;
+		Connection conn = getConnection();
 		ArrayList<Car> list = new CarDao().myBudjet(conn);
 		close(conn);
 		return list;

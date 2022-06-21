@@ -62,7 +62,7 @@ public class CarController {
 			
 			
 			if(list.isEmpty()) {
-				new CarView().displayFail("차량 조회 실패");
+				new CarView().displayFail("차량 처음부터 조회 실패");
 			} else {
 				
 				for(Car c : list) {
@@ -81,10 +81,16 @@ public class CarController {
 				}
 		
 			// intPrice 넣는데 성공!	
-				if(alterList.isEmpty()) {
-					new CarView().displayFail("매장 조회 실패");
+				int result = new CarService().insertByPrice(alterList);
+				if(result != 0) {
+					ArrayList<Car> orderByPriceList= new CarService().orderByPrice();
+					if(orderByPriceList.isEmpty()) {
+						new CarView().displayFail("차량 조회 실패");
+					} else {
+						new CarView().displayList(orderByPriceList);
+					}
 				} else {
-					new CarView().displayIntPriceList(alterList);
+					new CarView().displayFail("차량 조회 실패");
 				}
 			
 		}
