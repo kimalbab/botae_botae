@@ -38,7 +38,7 @@ public class CarView {
 			case 1 : qualified(); break;
 			case 2 : cc.reserveCarName(askCarName()); break;
 			case 3 : cc.searchStars(); break;
-			case 4 : cc.orderByPrice(); break;
+			case 4 : cc.onlyOrderByPrice(); break;//cc.orderByPrice(); break;
 			case 5 : askBudjet(); break;
 			case 6 : wantToReserve(askCarName()); break;
 			case 7 : cancelReserve(); break;
@@ -203,11 +203,14 @@ public class CarView {
 	
 	
 	public void displayIntPriceList(ArrayList<Car> list) {
-		for(int i=0; i<list.size(); i++) {
-			new Car().toStringIntPrice(list.get(i));
+		
+		for(Car c : list) {
+			new Car().toStringIntPrice(c);
 		}
+		
 		wantToBuy(list);
 	}
+	
 	
 	
 	

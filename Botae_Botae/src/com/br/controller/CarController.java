@@ -62,7 +62,7 @@ public class CarController {
 			
 			
 			if(list.isEmpty()) {
-				new CarView().displayFail("차량 처음부터 조회 실패");
+				new CarView().displayFail("차량 조회 실패");
 			} else {
 				
 				for(Car c : list) {
@@ -87,13 +87,24 @@ public class CarController {
 					if(orderByPriceList.isEmpty()) {
 						new CarView().displayFail("차량 조회 실패");
 					} else {
-						new CarView().displayList(orderByPriceList);
+						new CarView().displayIntPriceList(orderByPriceList);
 					}
 				} else {
 					new CarView().displayFail("차량 조회 실패");
 				}
 			
 		}
+		
+		public void onlyOrderByPrice() {
+			ArrayList<Car> orderByPriceList= new CarService().orderByPrice();
+			if(orderByPriceList.isEmpty()) {
+				new CarView().displayFail("차량 조회 실패");
+			} else {
+				new CarView().displayIntPriceList(orderByPriceList);
+			}
+	
+}
+		
 			
 		
 		

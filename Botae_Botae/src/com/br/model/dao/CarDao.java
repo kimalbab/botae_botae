@@ -282,10 +282,10 @@ public int insertByPrice(Connection conn, ArrayList<Car> alterList){
 			pstmt.setString(4, alterList.get(i).getFuel());
 			pstmt.setString(5, alterList.get(i).getNation());
 		    pstmt.setString(6, alterList.get(i).getBrand());
+		    result = pstmt.executeUpdate();	
 		   
 		}
-	    result = pstmt.executeUpdate();	
-		
+	    
 	} catch (SQLException e) {
 		e.printStackTrace();
 	} finally {
